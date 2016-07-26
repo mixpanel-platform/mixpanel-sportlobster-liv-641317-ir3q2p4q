@@ -113,7 +113,11 @@
             function getAge(date) {
               var now = new Date();
               var age = now.getFullYear() - date.getFullYear();
-              return age;
+              if(age === null){
+                return undefined
+              } else {
+                return age;
+              }
             };
             
             var age = getAge(dateOfBirth);
