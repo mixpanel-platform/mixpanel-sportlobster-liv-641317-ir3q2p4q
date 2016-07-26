@@ -57,6 +57,7 @@
         
        $("body").delegate( "#csv_export", "click", function() {
             var csv = "data:text/csv;charset=utf-8," + json_to_csv.jsonToCSV(last_response);
+            console.log(json_to_csv.jsonToCSV(last_response));
             $(this).attr("href", encodeURI(csv)).attr("download", 
                   "Survey_Export_" + survey_id + "_" + moment().format('MMM-DD-YYYY') + ".csv");
         });
@@ -67,7 +68,7 @@
           };
           var script = $('#cq').html();
           script = $.trim(script);
-          MP.api.custom_query(script, queryParams)
+          MP.api.jql(script, queryParams)
           .done(function(resp) {
                 $('#run_query').html("Run Query").prop("disabled",false);
                 last_response = resp;
@@ -105,7 +106,7 @@
                   answers["Question ID - " + v.$question_id] = v.$value;
                 }
             })
-            return {
+            var exportFields = {
               "Distinct_id": user.distinct_id,
               "Email": user.properties.$email,
               "Username": user.properties.$username,
@@ -113,6 +114,8 @@
               "City": user.properties.$city,
               "survey": answers
               }
+            console.log(exportFields);
+            return exportFields;
           });
         }
     </script>
