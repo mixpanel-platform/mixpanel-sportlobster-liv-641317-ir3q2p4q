@@ -106,11 +106,24 @@
                   answers["Question ID - " + v.$question_id] = v.$value;
                 }
             })
+            
+            var bday = user.properties.Birthday;
+            var dateOfBirth = new Date(bday);
+            
+            function getAge(date) {
+              var now = new Date();
+              var age = now.getFullYear() - date.getFullYear();
+              return age;
+            };
+            
+            var age = getAge(dateOfBirth);
+            
             return {
               "Distinct_id": user.distinct_id,
               "Email": user.properties.$email,
               "Username": user.properties.$username,
               "Birthday": user.properties.Birthday,
+              "Age": age,
               "City": user.properties.$city,
               "survey": answers
               }
