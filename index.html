@@ -111,7 +111,7 @@
             var dateOfBirth = new Date(bday);
             
             function getAge(date) {
-              if(bday === undefined){
+              if(bday === undefined || bday === null){
                 return undefined;
               } else {
                 var now = new Date();
